@@ -16,6 +16,7 @@ import {
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [toggle, setToggle] = useState("login")
 
   const links = [
     { name: "Home", href: "/" },
@@ -25,16 +26,16 @@ export default function Navbar() {
   ];
   const authBtn =<>
     <Link
-           className="btn btn-primary"
-            href="/login"
+           className={`${toggle ==='login'? ' btn btn-primary ': 'btn'}`}
+            href="/auth/signIn"
             
           >
             Login
           </Link>
 
           <Link
-           className="btn btn-primary"
-            href="/register"
+            className={`${toggle ==='register'? ' btn btn-primary ': 'btn'}`}
+            href="/auth/signUp"
             
           >
             Register
