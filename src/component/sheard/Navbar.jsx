@@ -13,19 +13,30 @@ import {
   Input,
   Button,
 } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [toggle, setToggle] = useState("login")
 
-  const links = [
-    { name: "Home", href: "/" },
-    { name: "Find Lawyers", href: "/lawyers" },
-    { name: "Practice Areas", href: "/practice-areas" },
-    
-  ];
+  const { data:session } = authClient.useSession()
+
+ const user = session?.user
+ console.log(user)
+
+  const links = <>
+  <li><Link href={'/'}>Home</Link></li>
+  <li><Link href={'/loyars'}>loyars</Link></li>
+  <li><Link href={'/deashboard'}>Deashboard</Link></li>
+  </>
   const authBtn =<>
-    <Link
+  {user? 
+   <button onClick={async()=>{await authClient.signOut(); redirect('/auth/signIn')}} className="btn text-red-500">SingOut</button>
+  :<div className="flex gap-2">
+
+       <Link
+          onClick={()=>setToggle('login')}
            className={`${toggle ==='login'? ' btn btn-primary ': 'btn'}`}
             href="/auth/signIn"
             
@@ -34,12 +45,15 @@ export default function Navbar() {
           </Link>
 
           <Link
+          onClick={()=>setToggle('register')}
             className={`${toggle ==='register'? ' btn btn-primary ': 'btn'}`}
             href="/auth/signUp"
             
           >
             Register
           </Link>
+    </div>}
+    
   
   </>
 
@@ -70,16 +84,7 @@ export default function Navbar() {
 
         {/* Center Links */}
         <ul className="hidden lg:flex items-center gap-8">
-          {links.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-sm font-medium text-slate-600 hover:text-blue-600 transition"
-              >
-                {link.name}
-              </Link>
-            </li>
-          ))}
+          {links}
         </ul>
 
         {/* Right Side */}
@@ -106,17 +111,7 @@ export default function Navbar() {
          
 
           <ul className="mt-5 space-y-4">
-            {links.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block text-slate-700"
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
+            {links}
           </ul>
 
           <div className="mt-6 flex gap-3">
