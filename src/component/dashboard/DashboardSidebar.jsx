@@ -5,7 +5,7 @@ import Link from "next/link";
 export function DashboardSidebar() {
     const navItems = [
         {  href: "/dashboard/recruiter", label: "Home" },
-        { href: "/dashboard/layer/manageProfile", label: "Lawyer" },
+        { href: "/dashboard/layer/manageProfile", label: "Maneg profile" },
        
     ];
 
