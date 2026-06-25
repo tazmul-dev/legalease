@@ -27,7 +27,7 @@ export default function Navbar() {
 
   const links = <>
   <li><Link href={'/'}>Home</Link></li>
-  <li><Link href={'/loyers'}>loyars</Link></li>
+  <li><Link href={'/loyers'}>Lawyers</Link></li>
   <li><Link href={`/dashboard/${user?.role || 'layer'}`}>Deashboard</Link></li>
   </>
   const authBtn =<>
