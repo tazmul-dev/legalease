@@ -161,7 +161,7 @@ export default function SignInPage() {
                     {/* Google Sign In */}
                     <Button
                         type="button"
-                        variant="bordered"
+                        variant="secondary"
                         className="w-full h-12 font-medium"
                        
                     >

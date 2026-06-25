@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export function DashboardSidebar() {
     const navItems = [
-        { icon: House, href: "/dashboard/recruiter", label: "Home" },
-        { icon: Magnifier, href: "/dashboard/recruiter/jobs", label: "Jobs" },
+        {  href: "/dashboard/recruiter", label: "Home" },
+        { href: "/dashboard/layer/manageProfile", label: "Lawyer" },
        
     ];
 
@@ -16,7 +16,7 @@ export function DashboardSidebar() {
                 className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
                 href={item.href}
             >
-                <item.icon className="size-5 text-muted" />
+                {/* <item.icon className="size-5 text-muted" /> */}
                 {item.label}
             </Link>
         ))}

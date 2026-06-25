@@ -54,14 +54,14 @@ export default function SignupPage() {
                 callbackURL: "/auth/signIn",
             });
             console.log(data)
-            
+
 
             if (authError) {
                 setError(authError.message || "Signup failed.");
                 return;
             }
 
-           
+
 
             setSuccess("Account created successfully!");
 
@@ -225,8 +225,9 @@ export default function SignupPage() {
                     {/* Submit */}
                     <Button
                         type="submit"
-                         variant="primary"
-                        className="w-full h-12 rounded-xl font-semibold"
+                       
+                        radius="xl"
+                        className="w-full h-12 font-semibold shadow-sm bg-zinc-900 hover:bg-zinc-800 text-gray-500 dark:bg-zinc-50 dark:hover:bg-zinc-200 dark:text-zinc-900 transition-all duration-200 mt-2"
                         isLoading={isLoading}
                         isDisabled={isLoading}
                     >

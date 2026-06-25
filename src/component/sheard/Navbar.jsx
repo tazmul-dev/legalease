@@ -23,12 +23,12 @@ export default function Navbar() {
   const { data:session } = authClient.useSession()
 
  const user = session?.user
- console.log(user)
+//  console.log(user)
 
   const links = <>
   <li><Link href={'/'}>Home</Link></li>
-  <li><Link href={'/loyars'}>loyars</Link></li>
-  <li><Link href={'/deashboard'}>Deashboard</Link></li>
+  <li><Link href={'/loyers'}>loyars</Link></li>
+  <li><Link href={`/dashboard/${user?.role || 'layer'}`}>Deashboard</Link></li>
   </>
   const authBtn =<>
   {user? 
