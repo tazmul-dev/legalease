@@ -12,6 +12,8 @@ export async function DashboardSidebar() {
     ];
     const userLinks = [
         {  href: "/dashboard/user", label: "Hiring Hestory" },
+        {  href: "/dashboard/user/update-profile", label: "Update-profile" },
+        {  href: "/dashboard/user/comment", label: "Comment" },
       
        
     ];

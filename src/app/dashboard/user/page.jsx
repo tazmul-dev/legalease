@@ -1,9 +1,10 @@
+import HiringHistory from "./HiringHistory";
 
 
 const UserPage = () => {
     return (
         <div>
-           user page 
+          <HiringHistory></HiringHistory>
         </div>
     );
 };

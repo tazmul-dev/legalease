@@ -2,28 +2,17 @@
 
 import { Table, Button } from "@heroui/react";
 
-export default function HiringHistoryTable() {
-   const requests = [
-    {
-      _id: "1",
-      lawyerName: "Jannatul Ferdous",
-      fee: "2800",
-      specialisation: "Labor Law",
-      hiringDate: "2026-07-20",
-      clientName: "Tazmul Hossain",
-      status: "Pending",
-    },
-    {
-      _id: "2",
-      lawyerName: "Rahim Ahmed",
-      fee: "3500",
-      specialisation: "Family Law",
-      hiringDate: "2026-07-18",
-      clientName: "Karim Uddin",
-      status: "Accepted",
-    },
-  ];
-
+export default function HiringHistoryTable({rejectRequest, requests, acceptRequest}) {
+    const rejecthandaler =async (id)=>{
+      await rejectRequest(id)
+     
+    }
+    const accepthandaler =async (id)=>{
+      await acceptRequest(id)
+     
+    }
+    
+  console.log(requests)
   const getStatusColor = (status) => {
     switch (status) {
       case "Accepted":
@@ -35,13 +24,7 @@ export default function HiringHistoryTable() {
     }
   };
 
-  const handleAccept = (id) => {
-    console.log("Accepted:", id);
-  };
-
-  const handleReject = (id) => {
-    console.log("Rejected:", id);
-  };
+  
 
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-6">
@@ -124,14 +107,12 @@ export default function HiringHistoryTable() {
                       </Table.Cell>
 
                       <Table.Cell>
-                        {request.status === "Pending" ? (
+                       
                           <div className="flex gap-2">
                             <Button
                               size="sm"
                               color="success"
-                              onPress={() =>
-                                handleAccept(request._id)
-                              }
+                              onClick={()=>accepthandaler(request._id)}
                             >
                               Accept
                             </Button>
@@ -140,16 +121,12 @@ export default function HiringHistoryTable() {
                               size="sm"
                               color="danger"
                               variant="flat"
-                              onPress={() =>
-                                handleReject(request._id)
-                              }
+                              onClick={()=>rejecthandaler(request._id)}
                             >
                               Reject
                             </Button>
                           </div>
-                        ) : (
-                          "-"
-                        )}
+                       
                       </Table.Cell>
                     </Table.Row>
                   ))}
@@ -244,9 +221,7 @@ export default function HiringHistoryTable() {
                   <Button
                     color="danger"
                     variant="flat"
-                    onPress={() =>
-                      handleReject(request._id)
-                    }
+                    onClick={()=>{rejecthandaler(request?._id)}}
                   >
                     Reject
                   </Button>
