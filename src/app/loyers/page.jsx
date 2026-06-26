@@ -6,8 +6,19 @@ import {Card, Link} from "@heroui/react";
 
 
 
-const loyersPage = async() => {
-  const lawyers = await browsLawyers()
+const loyersPage = async({searchParams}) => {
+
+  const filters = await searchParams;
+
+  const filterObjec = {
+    ...filters
+  }
+
+  const querySearch = new URLSearchParams(filterObjec)
+  const queryString = querySearch.toString()
+ 
+
+  const lawyers = await browsLawyers(queryString)
   
    return (
    <div>

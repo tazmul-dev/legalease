@@ -2,33 +2,8 @@
 
 import { Table, Button } from "@heroui/react";
 
-export default function HiringHistory() {
-  const hiringHistory = [
-    {
-      _id: "1",
-      lawyerName: "Jannatul Ferdous",
-      specialisation: "Labor Law",
-      fee: 2800,
-      hiringDate: "2026-07-21",
-      status: "Pending",
-    },
-    {
-      _id: "2",
-      lawyerName: "Rahim Ahmed",
-      specialisation: "Family Law",
-      fee: 3500,
-      hiringDate: "2026-07-20",
-      status: "Accepted",
-    },
-    {
-      _id: "3",
-      lawyerName: "Nusrat Jahan",
-      specialisation: "Criminal Law",
-      fee: 5000,
-      hiringDate: "2026-07-18",
-      status: "Rejected",
-    },
-  ];
+export default function HiringHistory({hiringHistory}) {
+ 
 
   const getStatusStyle = (status) => {
     switch (status) {

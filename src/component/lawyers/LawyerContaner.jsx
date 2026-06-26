@@ -12,8 +12,15 @@ const LawyerContaner = ({lawyers}) => {
   const router = useRouter()
   useEffect(()=>{
   const sp = new URLSearchParams()
+   
+  if(searchQuery){
+    sp.set('name', searchQuery)
+  }
    if(selectedType !=='all'){
-    sp.set('status', selectedType)
+    sp.set('status ', selectedType)
+   }
+   if(selectedCategory !=='all'){
+    sp.set('category', selectedCategory)
    }
   //  console.log('search params',sp.toString())
 
@@ -21,7 +28,7 @@ const LawyerContaner = ({lawyers}) => {
    router.push(path)
 
 
-  },[selectedType, router])
+  },[selectedType, router,searchQuery, selectedCategory ])
 
   // Compute matched filter rows instantly
   // const filteredLawyer = useMemo(() => {

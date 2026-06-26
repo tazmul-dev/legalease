@@ -17,6 +17,7 @@ export default function SignupPage() {
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("user");
     const [password, setPassword] = useState("");
+    const [image, setImage] =useState('')
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const [isVisible, setIsVisible] = useState(false);
@@ -50,6 +51,7 @@ export default function SignupPage() {
                 email,
                 password,
                 name,
+                image,
                 role,
                 callbackURL: "/auth/signIn",
             });
@@ -112,6 +114,24 @@ export default function SignupPage() {
                             />
                         </InputGroup>
                     </TextField>
+
+                     <TextField>
+                        <Label className="text-sm font-medium">
+                          Image url
+                        </Label>
+
+                        <InputGroup className="flex items-center gap-2 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 bg-zinc-50 dark:bg-zinc-900">
+                            <Person size={16} className="text-zinc-400" />
+
+                            <Input
+                                placeholder="Enter image usr"
+                                value={image}
+                                onChange={(e) => setImage(e.target.value)}
+                                className="w-full bg-transparent py-2 border-none outline-none"
+                            />
+                        </InputGroup>
+                    </TextField>
+
 
                     {/* Email */}
                     <TextField isRequired>

@@ -1,10 +1,17 @@
+import { getmyRequerst } from "@/lib/action/users";
 import HiringHistory from "./HiringHistory";
+import { getUserSession } from "@/lib/core/session";
 
 
-const UserPage = () => {
+const UserPage = async() => {
+    const Userid = await getUserSession()
+    const id =  Userid.id
+    console.log(Userid)
+    
+  const hiringHistory =  await getmyRequerst(id)
     return (
         <div>
-          <HiringHistory></HiringHistory>
+          <HiringHistory hiringHistory={hiringHistory}></HiringHistory>
         </div>
     );
 };

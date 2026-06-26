@@ -1,9 +1,12 @@
 import React from 'react';
+import UpdateProfileForm from './UpdateProfileForm';
+import { getUserSession } from '@/lib/core/session';
 
-const UpdateUserPrfilepage = () => {
+const UpdateUserPrfilepage = async() => {
+    const user = await getUserSession()
     return (
         <div>
-            update profle page
+           <UpdateProfileForm user ={user} ></UpdateProfileForm>
         </div>
     );
 };

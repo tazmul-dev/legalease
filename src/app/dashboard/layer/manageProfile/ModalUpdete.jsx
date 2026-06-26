@@ -1,15 +1,17 @@
 "use client";
-import {ArrowUpToLine, Envelope} from "@gravity-ui/icons";
-import {Button, FieldError, Input, Label, Modal, Surface, TextField} from "@heroui/react";
+import { ArrowUpToLine, Envelope } from "@gravity-ui/icons";
+import { Button, FieldError, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { useState } from "react";
 
 
-const ModalUpdet = ({service}) => {
+const ModalUpdet = ({ service }) => {
   console.log(service)
   const [errors, setErrors] = useState({});
-    const [imageUrl, setImageUrl] = useState("");
-    const [isUploading, setIsUploading] = useState(false);
-    const handleImageUpload = async (e) => {
+  const [imageUrl, setImageUrl] = useState("");
+
+  const [isUploading, setIsUploading] = useState(false);
+
+  const handleImageUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -49,92 +51,96 @@ const ModalUpdet = ({service}) => {
       setIsUploading(false);
     }
   };
+    
+  const handleSubmit =(e)=>{
+     e.preventDefault();
 
-   return (
+    const form = e.target;
+
+    const updatedProfile = {
+      name: form.name.value,
+      image: imageUrl,
+    };
+
+    console.log(updatedProfile);
+
+
+  }
+
+  return (
     <Modal>
       <Button variant="secondary">Edit</Button>
       <Modal.Backdrop>
         <Modal.Container placement="auto">
           <Modal.Dialog className="sm:max-w-md">
             <Modal.CloseTrigger />
-            
+
             <Modal.Body className="p-6">
               <Surface variant="default">
-                <form className="flex flex-col gap-4">
-                  <TextField className="w-full" name="name" type="text" variant="secondary">
-                    <Label>Name</Label>
-                    <Input defaultValue={'tazmul'}  placeholder="Enter your name" />
-                  </TextField>
-                  <TextField className="w-full" name="email" type="email" variant="secondary">
-                    <Label>Email</Label>
-                    <Input  placeholder="Enter your email" />
-                  </TextField>
-                        <div className="flex flex-col gap-1">
+                <form
+                  onSubmit={handleSubmit}
+                  className="bg-white p-6 rounded-2xl shadow space-y-5"
+                >
+                  <h2 className="text-2xl font-bold">
+                    Update Profile
+                  </h2>
 
-            <span className="text-zinc-400 text-sm font-medium">
-              Professional Photo
-            </span>
+                  <div>
+                    <label>
+                      Full Name
+                    </label>
 
-            <div className="flex items-center gap-4">
+                    <input
+                      type="text"
+                      name="name"
+                      defaultValue={"tazmul"}
+                      className="w-full border p-3 rounded-lg"
+                    />
+                  </div>
 
-              <label className="w-16 h-16 border border-dashed border-zinc-700 rounded-xl flex items-center justify-center cursor-pointer overflow-hidden">
+                  <div>
+                    <label>
+                      Email
+                    </label>
 
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="hidden"
-                />
+                    <input
+                      type="email"
+                      value={"skdjfieru"}
+                      readOnly
+                      className="w-full border p-3 rounded-lg bg-gray-100"
+                    />
+                  </div>
 
-                {imageUrl ? (
-                  <img
-                    src={imageUrl}
-                    alt="preview"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <ArrowUpToLine
-                    size={20}
-                    className="text-zinc-400"
-                  />
-                )}
+                  <div>
+                    <label>
+                      Profile Picture
+                    </label>
 
-              </label>
+                    <input
+                      type="file"
+                      onChange={handleImageUpload}
+                      className="w-full"
+                    />
+                  </div>
 
-              <div>
-                <p className="text-sm text-zinc-300">
-                  {isUploading
-                    ? "Uploading..."
-                    : "Upload Photo"}
-                </p>
+                  {imageUrl && (
+                    <img
+                      src={imageUrl}
+                      alt="Preview"
+                      className="w-24 h-24 rounded-full object-cover"
+                    />
+                  )}
 
-                <p className="text-xs text-zinc-500">
-                  JPG, PNG up to 5MB
-                </p>
-              </div>
-
-            </div>
-
-            {errors.image && (
-              <FieldError className="text-danger text-xs mt-1">
-                {errors.image}
-              </FieldError>
-            )}
-
-          </div>
-                  <TextField className="w-full" name="company" variant="secondary">
-                    <Label>Company</Label>
-                    <Input placeholder="Enter your company name" />
-                  </TextField>
-                  <TextField className="w-full" name="message" variant="secondary">
-                    <Label>Message</Label>
-                    <Input placeholder="Enter your message" />
-                  </TextField>
-                    <Button type="submit" slot="close">Send Message</Button>
+                  <button
+                    type="submit"
+                    className="w-full bg-black text-white py-3 rounded-lg"
+                  >
+                    Update Profile
+                  </button>
                 </form>
               </Surface>
             </Modal.Body>
-            
+
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Backdrop>

@@ -37,7 +37,7 @@ const LawyerFelter = ({
 
         {/* 2. Job Type Select Filter - Span 3 columns */}
         <div className="md:col-span-3">
-          <span className="text-sm font-medium text-zinc-400 block mb-2">Job Type</span>
+          <span className="text-sm font-medium text-zinc-400 block mb-2">Availablity</span>
           <Select 
             selectedKey={selectedType} 
             onSelectionChange={(key) => setSelectedType(key)}
@@ -52,16 +52,16 @@ const LawyerFelter = ({
             <Select.Popover className="bg-zinc-800 border border-zinc-700 rounded-xl shadow-xl mt-1 overflow-hidden z-50">
               <ListBox className="p-1">
                 <ListBox.Item id="all" className="flex items-center justify-between text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
-                  <span>All Types</span>
+                  <span></span>
                 </ListBox.Item>
-                <ListBox.Item id="Criminal-Law" className="flex items-center justify-between text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
-                  <span>Criminal-Law</span>
+                <ListBox.Item id="Available" className="flex items-center justify-between text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
+                  <span>Available</span>
                 </ListBox.Item>
-                <ListBox.Item id="Family-Law" className="flex items-center justify-between text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
-                  <span> Family-Law</span>
+                <ListBox.Item id="Busy" className="flex items-center justify-between text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
+                  <span>Busy</span>
                 </ListBox.Item>
-                <ListBox.Item id="contract" className="flex items-center justify-between text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
-                  <span> Corporate-Law</span>
+                <ListBox.Item id="Unavailable" className="flex items-center justify-between text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
+                  <span>Unavailable</span>
                 </ListBox.Item>
               </ListBox>
             </Select.Popover>
@@ -87,14 +87,14 @@ const LawyerFelter = ({
                 <ListBox.Item id="all" className="text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
                   <span>All Categories</span>
                 </ListBox.Item>
-                <ListBox.Item id="engineering" className="text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
-                  <span>Engineering</span>
+                <ListBox.Item id="Criminal" className="text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
+                  <span>Criminal</span>
                 </ListBox.Item>
-                <ListBox.Item id="design" className="text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
-                  <span>Design</span>
+                <ListBox.Item id="Family" className="text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
+                  <span>Family</span>
                 </ListBox.Item>
-                <ListBox.Item id="product" className="text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
-                  <span>Product</span>
+                <ListBox.Item id="Corporate" className="text-zinc-200 hover:bg-purple-600 hover:text-white rounded-lg px-3 py-2 text-sm cursor-pointer capitalize">
+                  <span>Corporate</span>
                 </ListBox.Item>
               </ListBox>
             </Select.Popover>
