@@ -42,7 +42,7 @@ const textAreaClass =
 
 
 const ManageProfile = ({user, createService}) => {
-    const userId = user?.id
+    const lawyerId = user?.id
     // console.log(userId, "UserId")
    const [errors, setErrors] = useState({});
   const [imageUrl, setImageUrl] = useState("");
@@ -102,7 +102,7 @@ const ManageProfile = ({user, createService}) => {
       consultationFee: formData.get("consultationFee"),
       dateJoined: formData.get("dateJoined"),
       status: "Available",
-      userId:userId
+      lawyerId:lawyerId
     };
 
       const service = await createService(lowyerData)
