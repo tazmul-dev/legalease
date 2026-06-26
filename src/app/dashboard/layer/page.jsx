@@ -1,9 +1,10 @@
 import React from 'react';
+import HiringHistoryTable from './HiringHistoryTable';
 
 const layerpage = () => {
     return (
         <div>
-            layerPage
+            <HiringHistoryTable></HiringHistoryTable>
         </div>
     );
 };

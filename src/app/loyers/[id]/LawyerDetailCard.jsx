@@ -13,6 +13,8 @@ const handelHire = async()=>{
     clientName: user.name,
     userId: user.id,
     lawyerId: lawyer._id,
+    status: 'Pending',
+    pymentStatus: 'unpaid'
 
   }
   console.log(lawyerRequestData)

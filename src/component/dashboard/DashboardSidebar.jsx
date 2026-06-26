@@ -1,13 +1,32 @@
+import { getUserSession } from "@/lib/core/session";
 import { LayoutSideContentLeft,  House, Magnifier, Person } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
 import Link from "next/link";
 
-export function DashboardSidebar() {
-    const navItems = [
-        {  href: "/dashboard/recruiter", label: "Home" },
+export async function DashboardSidebar() {
+    const user = await getUserSession()
+    const lawyerLinks = [
+        {  href: "/dashboard/layer", label: "Hiring Hestory" },
         { href: "/dashboard/layer/manageProfile", label: "Maneg profile" },
        
     ];
+    const userLinks = [
+        {  href: "/dashboard/user", label: "Hiring Hestory" },
+      
+       
+    ];
+    const adminLinks = [
+        {  href: "/dashboard/layer", label: "Hiring Hestory" },
+        { href: "/dashboard/layer/manageProfile", label: "Maneg profile" },
+       
+    ];
+    const navLinksMap = {
+        user: userLinks,
+        layer: lawyerLinks,
+        admin: adminLinks
+    }
+     const navItems = navLinksMap[user?.role || 'user'];
+
 
     const navContent = <nav className="flex flex-col gap-1">
         {navItems.map((item) => (
