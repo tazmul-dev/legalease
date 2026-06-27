@@ -1,8 +1,7 @@
 
 import LawyerContaner from "@/component/lawyers/LawyerContaner";
 import { browsLawyers } from "@/lib/api/lawyers";
-import {CircleDollar} from "@gravity-ui/icons";
-import {Card, Link} from "@heroui/react";
+
 
 
 
