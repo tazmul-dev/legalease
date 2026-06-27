@@ -11,6 +11,7 @@ import {
 } from "@gravity-ui/icons";
 
 import { signUp } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 export default function SignupPage() {
     const [name, setName] = useState("");
@@ -78,6 +79,7 @@ export default function SignupPage() {
         } finally {
             setIsLoading(false);
         }
+        redirect('/auth/signIn')
     };
 
     return (
@@ -164,7 +166,7 @@ export default function SignupPage() {
                             className="w-full rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 px-3 py-3 text-sm outline-none"
                         >
                             <option value="user">User</option>
-                            <option value="lawyer">Lawyer</option>
+                            <option value="layer">layer</option>
                         </select>
                     </div>
 
