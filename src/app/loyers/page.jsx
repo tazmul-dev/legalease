@@ -23,7 +23,7 @@ const loyersPage = async({searchParams}) => {
    return (
    <div>
 
-      <LawyerContaner lawyers={lawyers} ></LawyerContaner>
+      <LawyerContaner lawyers={lawyers} filters={filters} ></LawyerContaner>
         
     
    </div>

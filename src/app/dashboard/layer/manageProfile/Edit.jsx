@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import ModalUpdet from './ModalUpdete';
 
-const Edit = ({loyerData, deleteLowyer}) => {
+const Edit = ({loyerData, deleteLowyer,editeServece}) => {
     const hendelDelete = async(id)=>{
         await deleteLowyer(id)
 
@@ -63,7 +63,7 @@ const Edit = ({loyerData, deleteLowyer}) => {
 
         <div className="flex gap-3">
 
-         <ModalUpdet service={loyerData}></ModalUpdet>
+         <ModalUpdet editeServece={editeServece} service={service}></ModalUpdet>
 
           <button
           onClick={()=>hendelDelete(service?._id)}

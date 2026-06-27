@@ -18,8 +18,8 @@ export async function DashboardSidebar() {
        
     ];
     const adminLinks = [
-        {  href: "/dashboard/layer", label: "Hiring Hestory" },
-        { href: "/dashboard/layer/manageProfile", label: "Maneg profile" },
+        {  href: "/dashboard/admin/manage-users", label: "manage-users" },
+        { href: "/dashboard/admin/all-transactions", label: "all-transactions" },
        
     ];
     const navLinksMap = {

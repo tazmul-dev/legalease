@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function UpdateProfileForm({ user }) {
+export default function UpdateProfileForm({ user, updateProfile }) {
   const [imageUrl, setImageUrl] = useState(
     user?.image || ""
   );
@@ -34,11 +34,13 @@ export default function UpdateProfileForm({ user }) {
     const updatedProfile = {
       name: form.name.value,
       image: imageUrl,
+      id: user.id
+      
     };
 
     console.log(updatedProfile);
-
-    // PATCH Request
+    await updateProfile(updatedProfile)
+    
   };
 
   return (

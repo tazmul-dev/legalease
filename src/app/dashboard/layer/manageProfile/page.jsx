@@ -1,7 +1,7 @@
 import { getUserSession } from "@/lib/core/session";
 import Edit from "./Edit";
 import ManageProfile from "./ManageProfile";
-import { createService, deleteLowyer, getLowyaer } from "@/lib/action/loyerService";
+import { createService, deleteLowyer, editeServece, getLowyaer } from "@/lib/action/loyerService";
 
 
 
@@ -21,7 +21,7 @@ const manageProfilepage = async() => {
         <div>
           {loyerData >= 0? 
            <ManageProfile user={user} createService={createService}></ManageProfile> :
-         <Edit loyerData={loyerData} deleteLowyer={deleteLowyer}></Edit> 
+         <Edit editeServece={editeServece} loyerData={loyerData} deleteLowyer={deleteLowyer}></Edit> 
           }
       
       

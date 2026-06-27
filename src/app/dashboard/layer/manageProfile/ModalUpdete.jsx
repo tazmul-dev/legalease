@@ -4,10 +4,12 @@ import { Button, FieldError, Input, Label, Modal, Surface, TextField } from "@he
 import { useState } from "react";
 
 
-const ModalUpdet = ({ service }) => {
-  console.log(service)
+const ModalUpdet = ({ service,editeServece }) => {
+   const {name, category, summary, consultationFee,image,_id}= service;
+  
+
   const [errors, setErrors] = useState({});
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(image);
 
   const [isUploading, setIsUploading] = useState(false);
 
@@ -52,17 +54,23 @@ const ModalUpdet = ({ service }) => {
     }
   };
     
-  const handleSubmit =(e)=>{
+  const handleSubmit = async(e)=>{
      e.preventDefault();
 
     const form = e.target;
 
     const updatedProfile = {
       name: form.name.value,
+      fee: form.fee.value,
+      summary:form.summary.value,
+      category:form.category.value,
+      id:_id,
+
       image: imageUrl,
     };
 
     console.log(updatedProfile);
+    await editeServece(updatedProfile)
 
 
   }
@@ -93,23 +101,48 @@ const ModalUpdet = ({ service }) => {
                     <input
                       type="text"
                       name="name"
-                      defaultValue={"tazmul"}
+                      defaultValue={name}
+                      className="w-full border p-3 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label>
+                      summary
+                    </label>
+
+                    <input
+                      type="text"
+                      name="summary"
+                      defaultValue={summary}
+                      className="w-full border p-3 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label>
+                      fee
+                    </label>
+
+                    <input
+                      type="number"
+                      name="fee"
+                      defaultValue={consultationFee}
+                      className="w-full border p-3 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label>
+                      category
+                    </label>
+
+                    <input
+                      type="text"
+                      name="category"
+                      defaultValue={category}
                       className="w-full border p-3 rounded-lg"
                     />
                   </div>
 
-                  <div>
-                    <label>
-                      Email
-                    </label>
-
-                    <input
-                      type="email"
-                      value={"skdjfieru"}
-                      readOnly
-                      className="w-full border p-3 rounded-lg bg-gray-100"
-                    />
-                  </div>
+                  
 
                   <div>
                     <label>
@@ -132,8 +165,10 @@ const ModalUpdet = ({ service }) => {
                   )}
 
                   <button
+                   
                     type="submit"
                     className="w-full bg-black text-white py-3 rounded-lg"
+                     slot="close"
                   >
                     Update Profile
                   </button>

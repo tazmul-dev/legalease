@@ -1,10 +1,23 @@
 'use server'
 
 import { revalidatePath } from "next/cache";
+import { auth } from "../auth";
+import { headers } from "next/headers";
+import { authClient } from "../auth-client";
+
+
 
 const basUrl = process.env.SERVER_URL
 
 export const createService =async (data)=>{
+console.log(data,'data')
+    const {token} = await auth.api.getAccessToken({
+        headers: await headers()
+    })
+    console.log(token,"token")
+   
+    // const {data:token} = await authClient.token()
+    // console.log(token,"token")
  const res = await fetch(`http://localhost:5000/service`, {
         method: 'POST',
         headers: {
@@ -33,10 +46,9 @@ const res = await fetch(`http://localhost:5000/maneg/profile/${id}`,{
     method: "DELETE"
 })
 const data = res.json()
-console.log(data)
-if(data?.deletedCount>=0){
-    revalidatePath('/dashboard/layer/manageProfile')
-}
+
+revalidatePath('/dashboard/layer/manageProfile')
+
  return data
 }
 
@@ -44,17 +56,23 @@ if(data?.deletedCount>=0){
 // hiringhistory related:
 
 export const rejectRequest = async(id)=>{
+   
+
     const res = await fetch(`http://localhost:5000/requestReject/${id}`,{
         method:'PATCH'
     })
+    revalidatePath('/dashboard/layer')
     return await res.json()
 
 
 }
 export const acceptRequest = async(id)=>{
     const res = await fetch(`http://localhost:5000/requestAccept/${id}`,{
-        method:'PATCH'
+        method:'PATCH',
+      
+      
     })
+      revalidatePath('/dashboard/layer')
     return await res.json()
 
 
@@ -66,3 +84,16 @@ export const getRequestData=async(id)=>{
     return await res.json()
 }
 
+export const editeServece = async(data)=>{
+    const res = await fetch(`http://localhost:5000/edit/service`,{
+         method:'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    
+    return res.json()
+ }
+
+ 

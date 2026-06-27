@@ -1,5 +1,9 @@
+import { getUserToken } from "./session";
+
  
  const baseUrl = process.env.SERVER_URL
+
+ 
 
 export const serverMutation = async (path, data, method = 'POST') => {
     const res = await fetch(`${baseUrl}${path}`, {

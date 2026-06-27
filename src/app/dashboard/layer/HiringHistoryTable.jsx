@@ -2,39 +2,37 @@
 
 import { Table, Button } from "@heroui/react";
 
-export default function HiringHistoryTable({rejectRequest, requests, acceptRequest}) {
-    const rejecthandaler =async (id)=>{
-      await rejectRequest(id)
-     
-    }
-    const accepthandaler =async (id)=>{
-      await acceptRequest(id)
-     
-    }
-    
-  console.log(requests)
+export default function HiringHistoryTable({ rejectRequest, requests = [], acceptRequest }) {
+  
+  const rejectHandler = async (id) => {
+    await rejectRequest(id);
+  };
+
+  const acceptHandler = async (id) => {
+    await acceptRequest(id);
+  };
+
   const getStatusColor = (status) => {
     switch (status) {
       case "Accepted":
         return "bg-green-100 text-green-700";
       case "Rejected":
         return "bg-red-100 text-red-700";
+      case "Pending":
       default:
         return "bg-yellow-100 text-yellow-700";
     }
   };
 
-  
-
   return (
-    <div className="max-w-7xl mx-auto p-4 md:p-6">
-      <div className="bg-white rounded-3xl shadow-sm border p-5 md:p-6">
-        <h2 className="text-2xl font-bold mb-6">
+    <div className="max-w-7xl mx-auto p-4 md:p-6 w-full">
+      <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-5 md:p-6 w-full">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">
           Hiring Requests
         </h2>
 
         {/* ========================= */}
-        {/* Desktop Table */}
+        {/* Desktop Table View (md and up) */}
         {/* ========================= */}
         <div className="hidden md:block overflow-x-auto">
           <Table>
@@ -44,89 +42,62 @@ export default function HiringHistoryTable({rejectRequest, requests, acceptReque
                 className="min-w-[900px]"
               >
                 <Table.Header>
-                  <Table.Column isRowHeader>
-                    Client Name
-                  </Table.Column>
-
-                  <Table.Column>
-                    Lawyer
-                  </Table.Column>
-
-                  <Table.Column>
-                    Specialisation
-                  </Table.Column>
-
-                  <Table.Column>
-                    Fee
-                  </Table.Column>
-
-                  <Table.Column>
-                    Request Date
-                  </Table.Column>
-
-                  <Table.Column>
-                    Status
-                  </Table.Column>
-
-                  <Table.Column>
-                    Actions
-                  </Table.Column>
+                  <Table.Column isRowHeader>Client Name</Table.Column>
+                  <Table.Column>Lawyer</Table.Column>
+                  <Table.Column>Specialisation</Table.Column>
+                  <Table.Column>Fee</Table.Column>
+                  <Table.Column>Request Date</Table.Column>
+                  <Table.Column>Status</Table.Column>
+                  <Table.Column>Actions</Table.Column>
                 </Table.Header>
 
                 <Table.Body>
                   {requests.map((request) => (
-                    <Table.Row key={request._id}>
-                      <Table.Cell>
+                    <Table.Row key={request._id} className="hover:bg-gray-50 transition-colors">
+                      <Table.Cell className="font-medium text-gray-900">
                         {request.clientName}
                       </Table.Cell>
-
-                      <Table.Cell>
-                        {request.lawyerName}
-                      </Table.Cell>
-
-                      <Table.Cell>
-                        {request.specialisation}
-                      </Table.Cell>
-
-                      <Table.Cell>
+                      <Table.Cell>{request.lawyerName}</Table.Cell>
+                      <Table.Cell>{request.specialisation}</Table.Cell>
+                      <Table.Cell className="font-medium">
                         ৳ {request.fee}
                       </Table.Cell>
-
-                      <Table.Cell>
-                        {request.hiringDate}
-                      </Table.Cell>
-
+                      <Table.Cell>{request.hiringDate}</Table.Cell>
                       <Table.Cell>
                         <span
-                          className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                          className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(
                             request.status
                           )}`}
                         >
                           {request.status}
                         </span>
                       </Table.Cell>
-
                       <Table.Cell>
-                       
+                        {/* Only show actions if the request is pending to match mobile behavior */}
+                        {request.status === "Pending" ? (
                           <div className="flex gap-2">
                             <Button
                               size="sm"
                               color="success"
-                              onClick={()=>accepthandaler(request._id)}
+                              variant="flat"
+                              onPress={() => acceptHandler(request._id)}
                             >
                               Accept
                             </Button>
-
                             <Button
                               size="sm"
                               color="danger"
                               variant="flat"
-                              onClick={()=>rejecthandaler(request._id)}
+                              onPress={() => rejectHandler(request._id)}
                             >
                               Reject
                             </Button>
                           </div>
-                       
+                        ) : (
+                          <span className="text-gray-400 text-sm italic">
+                            Resolved
+                          </span>
+                        )}
                       </Table.Cell>
                     </Table.Row>
                   ))}
@@ -137,27 +108,26 @@ export default function HiringHistoryTable({rejectRequest, requests, acceptReque
         </div>
 
         {/* ========================= */}
-        {/* Mobile Card View */}
+        {/* Mobile Card View (below md) */}
         {/* ========================= */}
         <div className="md:hidden space-y-4">
+          {requests.length === 0 && (
+            <p className="text-center text-gray-500 py-4">No requests found.</p>
+          )}
           {requests.map((request) => (
             <div
               key={request._id}
-              className="border rounded-2xl p-4 shadow-sm"
+              className="border border-gray-100 bg-gray-50/50 rounded-2xl p-4 shadow-sm"
             >
-              <div className="flex justify-between items-start">
+              <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="font-bold text-lg">
+                  <h3 className="font-bold text-lg text-gray-900">
                     {request.clientName}
                   </h3>
-
-                  <p className="text-sm text-gray-500">
-                    Hiring Request
-                  </p>
+                  <p className="text-sm text-gray-500">Hiring Request</p>
                 </div>
-
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                  className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${getStatusColor(
                     request.status
                   )}`}
                 >
@@ -165,63 +135,38 @@ export default function HiringHistoryTable({rejectRequest, requests, acceptReque
                 </span>
               </div>
 
-              <div className="mt-4 space-y-3 text-sm">
+              <div className="space-y-3 text-sm bg-white p-3 rounded-xl border border-gray-100">
                 <div className="flex justify-between">
-                  <span className="text-gray-500">
-                    Lawyer
-                  </span>
-
-                  <span className="font-medium">
-                    {request.lawyerName}
-                  </span>
+                  <span className="text-gray-500">Lawyer</span>
+                  <span className="font-medium text-right text-gray-900">{request.lawyerName}</span>
                 </div>
-
                 <div className="flex justify-between">
-                  <span className="text-gray-500">
-                    Specialisation
-                  </span>
-
-                  <span>
-                    {request.specialisation}
-                  </span>
+                  <span className="text-gray-500">Specialisation</span>
+                  <span className="text-right text-gray-900">{request.specialisation}</span>
                 </div>
-
                 <div className="flex justify-between">
-                  <span className="text-gray-500">
-                    Fee
-                  </span>
-
-                  <span>
-                    ৳ {request.fee}
-                  </span>
+                  <span className="text-gray-500">Fee</span>
+                  <span className="font-medium text-right text-gray-900">৳ {request.fee}</span>
                 </div>
-
                 <div className="flex justify-between">
-                  <span className="text-gray-500">
-                    Request Date
-                  </span>
-
-                  <span>
-                    {request.hiringDate}
-                  </span>
+                  <span className="text-gray-500">Request Date</span>
+                  <span className="text-right text-gray-900">{request.hiringDate}</span>
                 </div>
               </div>
 
               {request.status === "Pending" && (
-                <div className="grid grid-cols-2 gap-3 mt-5">
+                <div className="grid grid-cols-2 gap-3 mt-4">
                   <Button
                     color="success"
-                    onPress={() =>
-                      handleAccept(request._id)
-                    }
+                    variant="flat"
+                    onPress={() => acceptHandler(request._id)}
                   >
                     Accept
                   </Button>
-
                   <Button
                     color="danger"
                     variant="flat"
-                    onClick={()=>{rejecthandaler(request?._id)}}
+                    onPress={() => rejectHandler(request._id)}
                   >
                     Reject
                   </Button>
@@ -230,6 +175,7 @@ export default function HiringHistoryTable({rejectRequest, requests, acceptReque
             </div>
           ))}
         </div>
+
       </div>
     </div>
   );

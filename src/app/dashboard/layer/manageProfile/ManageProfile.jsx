@@ -106,7 +106,8 @@ const ManageProfile = ({user, createService}) => {
     };
 
       const service = await createService(lowyerData)
-
+      console.log(service)
+   
      
 
 
