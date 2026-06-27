@@ -7,9 +7,9 @@ import { Pagination } from "@heroui/react";
 
 
 const LawyerContaner = ({ lawyers, filters}) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedType, setSelectedType] = useState("all");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState(filters.search);
+  const [selectedType, setSelectedType] = useState(filters.status||"all");
+  const [selectedCategory, setSelectedCategory] = useState( filters.category||"all");
 
   const router = useRouter()
  

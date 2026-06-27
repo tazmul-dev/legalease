@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Table, Button } from "@heroui/react";
+import { roleChange, usetDelet } from "@/lib/action/admin";
 // import { useRouter } from "next/navigation"; // Uncomment if you want to route dynamically
 
 export default function ManageUsers({ users }) {
@@ -9,14 +10,15 @@ export default function ManageUsers({ users }) {
  
   // const router = useRouter(); // Uncomment if using Next.js router
 
-  const handleRoleChange = (id) => {
+  const handleRoleChange = async(id) => {
     // Add your logic here for the role change button
     // For example, navigate to another page: router.push(`/user/${id}`)
-    console.log("Role change clicked for user ID:", id);
+    // console.log("Role change clicked for user ID:", id);
+    await roleChange(id)
   };
 
   const handleDeleteUser = async (id) => {
-    
+    await usetDelet(id)
   };
 
   const roleBadge = (role) => {
