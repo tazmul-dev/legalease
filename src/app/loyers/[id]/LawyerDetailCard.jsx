@@ -3,8 +3,12 @@
 import {AlertDialog, Button} from "@heroui/react";
 
 
+
 const LawyerDetailCard = ({ lawyer, user, hireRequest }) => {
 const handelHire = async()=>{
+    // if(!user){
+    //     redirect
+    // }
   const lawyerRequestData = {
     lawyerName:lawyer.name,
     fee:lawyer.consultationFee,

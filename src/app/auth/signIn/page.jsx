@@ -9,7 +9,7 @@ import {
     ShieldKeyhole,
 } from "@gravity-ui/icons";
 
-import { signIn } from "@/lib/auth-client";
+import { authClient, signIn } from "@/lib/auth-client";
 
 export default function SignInPage() {
     const [email, setEmail] = useState("");
@@ -55,6 +55,11 @@ export default function SignInPage() {
     //         setError("Google sign in failed.");
     //     }
     // };
+      const handalGoogleLogin = async()=>{
+        const data = await authClient.signIn.social({
+              provider: "google",
+        })
+    }
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-zinc-950 px-4">
@@ -160,6 +165,7 @@ export default function SignInPage() {
 
                     {/* Google Sign In */}
                     <Button
+                       onClick={handalGoogleLogin}
                         type="button"
                         variant="secondary"
                         className="w-full h-12 font-medium"

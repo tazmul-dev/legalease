@@ -14,11 +14,13 @@ import {
   Button,
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [toggle, setToggle] = useState("login")
+  const [search, setSearch] = useState('')
+  const router = useRouter();
 
   const { data:session } = authClient.useSession()
 
@@ -56,6 +58,11 @@ export default function Navbar() {
     
   
   </>
+  const hendelSearch =async(e)=>{
+    e.preventDefault();
+
+    router.push(`/loyers?search=${search}`)
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b bg-white/90 backdrop-blur-md">
@@ -74,12 +81,16 @@ export default function Navbar() {
           </Link>
 
           {/* Search */}
-          <div className=" max-w-72">
+          <form
+         onKeyUp={hendelSearch}
+          className=" max-w-72">
             <Input
               placeholder="Search lawyers..."
+              value={search}
+              onChange={(e)=>setSearch(e.target.value)}
               startContent={<Magnifier />}
             />
-          </div>
+          </form>
         </div>
 
         {/* Center Links */}

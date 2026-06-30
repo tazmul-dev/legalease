@@ -4,7 +4,7 @@ import { allusers } from '@/lib/api/admin';
 
 const mageUserpage = async() => {
     const users = await allusers()
-    console.log(users)
+    // console.log(users)
     return (
         <div>
             <ManageUsers users={users}></ManageUsers>

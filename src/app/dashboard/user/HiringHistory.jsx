@@ -1,6 +1,7 @@
 "use client";
 
 import { Table, Button } from "@heroui/react";
+import Link from "next/link";
 
 export default function HiringHistory({hiringHistory}) {
  
@@ -89,12 +90,13 @@ export default function HiringHistory({hiringHistory}) {
 
                       <Table.Cell>
                         {item.status === "Accepted" ? (
-                          <Button
+                          <Link
+                          href={`/dashboard/user/${item._id}`}
                             color="success"
                             size="sm"
                           >
                             Pay Now
-                          </Button>
+                          </Link>
                         ) : (
                           "-"
                         )}

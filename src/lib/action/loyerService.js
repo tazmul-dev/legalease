@@ -5,6 +5,7 @@ import { auth } from "../auth";
 import { headers } from "next/headers";
 
 
+
 const basUrl = process.env.SERVER_URL
 
 export const createService = async (data) => {
@@ -24,14 +25,14 @@ export const createService = async (data) => {
     // })
     //   console.log(tokenData.token,"token")
 
-    const res = await fetch(`http://localhost:5000/service`, {
+    const res = await fetch(`https://legalease-server-tau.vercel.app/service`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             ...(token && { 'Authorization': `Bearer ${token}` }),
             // 'authorizartion': `Bearer ${tokenData.token}`
         },
-        body: JSON.stringify(data),
+        body:JSON.stringify(data),
     });
 
     revalidatePath('/dashboard/layer/manageProfile')
@@ -39,11 +40,26 @@ export const createService = async (data) => {
 }
 
 
-//get api;
+
 
 export const getLowyaer = async (id) => {
-    console.log(id, 'Id')
-    const res = await fetch(`http://localhost:5000/maneg/profile/${id}`)
+    let token = null;
+    try {
+        const tokenData = await auth.api.getToken({
+            headers: await headers()
+
+        });
+        token = tokenData?.token;
+        console.log(token, "token")
+    } catch (err) {
+        console.warn("Could not retrieve access token:", err.message);
+    }
+     
+    const res = await fetch(`https://legalease-server-tau.vercel.app/maneg/profile/${id}`,{
+        headers:{
+             ...(token && { 'Authorization': `Bearer ${token}` }),
+        }
+    })
 
     return await res.json()
 }
@@ -51,8 +67,23 @@ export const getLowyaer = async (id) => {
 //delet:
 
 export const deleteLowyer = async (id) => {
-    const res = await fetch(`http://localhost:5000/maneg/profile/${id}`, {
-        method: "DELETE"
+    let token = null;
+    try {
+        const tokenData = await auth.api.getToken({
+            headers: await headers()
+
+        });
+        token = tokenData?.token;
+        console.log(token, "token")
+    } catch (err) {
+        console.warn("Could not retrieve access token:", err.message);
+    }
+    
+    const res = await fetch(`https://legalease-server-tau.vercel.app/maneg/profile/${id}`, {
+        method: "DELETE",
+          headers:{
+             ...(token && { 'Authorization': `Bearer ${token}` }),
+        }
     })
     const data = res.json()
 
@@ -66,9 +97,24 @@ export const deleteLowyer = async (id) => {
 
 export const rejectRequest = async (id) => {
 
+    let token = null;
+    try {
+        const tokenData = await auth.api.getToken({
+            headers: await headers()
 
-    const res = await fetch(`http://localhost:5000/requestReject/${id}`, {
-        method: 'PATCH'
+        });
+        token = tokenData?.token;
+        console.log(token, "token")
+    } catch (err) {
+        console.warn("Could not retrieve access token:", err.message);
+    }
+
+    const res = await fetch(`https://legalease-server-tau.vercel.app/requestReject/${id}`, {
+        method: 'PATCH',
+        headers:{
+             ...(token && { 'Authorization': `Bearer ${token}` }),
+        }
+        
     })
     revalidatePath('/dashboard/layer')
     return await res.json()
@@ -76,8 +122,23 @@ export const rejectRequest = async (id) => {
 
 }
 export const acceptRequest = async (id) => {
-    const res = await fetch(`http://localhost:5000/requestAccept/${id}`, {
+     let token = null;
+    try {
+        const tokenData = await auth.api.getToken({
+            headers: await headers()
+
+        });
+        token = tokenData?.token;
+        console.log(token, "token")
+    } catch (err) {
+        console.warn("Could not retrieve access token:", err.message);
+    }
+
+    const res = await fetch(`https://legalease-server-tau.vercel.app/requestAccept/${id}`, {
         method: 'PATCH',
+         headers:{
+             ...(token && { 'Authorization': `Bearer ${token}` }),
+        }
 
 
     })
@@ -89,15 +150,47 @@ export const acceptRequest = async (id) => {
 
 
 export const getRequestData = async (id) => {
-    const res = await fetch(`http://localhost:5000/api/request/${id}`)
+    let token = null;
+    try {
+        const tokenData = await auth.api.getToken({
+            headers: await headers()
+
+        });
+        token = tokenData?.token;
+        console.log(token, "token")
+    } catch (err) {
+        console.warn("Could not retrieve access token:", err.message);
+    }
+
+    
+    const res = await fetch(`https://legalease-server-tau.vercel.app/api/request/${id}`,{
+         headers:{
+             ...(token && { 'Authorization': `Bearer ${token}` }),
+        }
+
+
+    })
     return await res.json()
 }
 
 export const editeServece = async (data) => {
-    const res = await fetch(`http://localhost:5000/edit/service`, {
+    let token = null;
+    try {
+        const tokenData = await auth.api.getToken({
+            headers: await headers()
+
+        });
+        token = tokenData?.token;
+        console.log(token, "token")
+    } catch (err) {
+        console.warn("Could not retrieve access token:", err.message);
+    }
+   
+    const res = await fetch(`https://legalease-server-tau.vercel.app/edit/service`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
+            ...(token && { 'Authorization': `Bearer ${token}` }),
         },
         body: JSON.stringify(data),
     })

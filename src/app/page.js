@@ -1,6 +1,7 @@
 import Banner from '@/component/Banner';
 import FeaturedLawyers from '@/component/FeaturedLawyers';
 import LegalCategories from '@/component/LegalCategories';
+import TopLegalExperts from '@/component/TopLegalExperts';
 import { feature } from '@/lib/api/home';
 import React from 'react';
 
@@ -12,7 +13,9 @@ const app = async() => {
 
       <Banner></Banner>
       <FeaturedLawyers lawyers={lawyers}></FeaturedLawyers>
+      
       <LegalCategories></LegalCategories>
+      <TopLegalExperts></TopLegalExperts>
     </div>
   );
 };

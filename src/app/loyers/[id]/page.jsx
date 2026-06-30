@@ -5,11 +5,11 @@ import { getUserSession } from '@/lib/core/session';
 
 const LawyerDetailPage = async({params}) => {
     const {id} =await params;
-    console.log(id)
+    // console.log(id)
     const lawyer = await detailsLawyer(id)
-    console.log(lawyer)
+    // console.log(lawyer)
     const user= await getUserSession()
-    console.log(user)
+    // console.log(user)
     return (
         <div>
             Lawyer detail page

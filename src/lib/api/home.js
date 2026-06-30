@@ -1,5 +1,5 @@
 
 export const feature = async()=>{
-    const res = await fetch('http://localhost:5000/featured-lawyers')
+    const res = await fetch('https://legalease-server-tau.vercel.app/featured-lawyers')
     return res.json()
 }

@@ -6,7 +6,7 @@ import { getUserSession } from "@/lib/core/session";
 const UserPage = async() => {
     const Userid = await getUserSession()
     const id =  Userid.id
-    console.log(Userid)
+    // console.log(Userid)
     
   const hiringHistory =  await getmyRequerst(id)
     return (

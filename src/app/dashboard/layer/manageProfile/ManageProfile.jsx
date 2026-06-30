@@ -43,6 +43,7 @@ const textAreaClass =
 
 const ManageProfile = ({user, createService}) => {
     const lawyerId = user?.id
+    // console.log(user)
     // console.log(userId, "UserId")
    const [errors, setErrors] = useState({});
   const [imageUrl, setImageUrl] = useState("");

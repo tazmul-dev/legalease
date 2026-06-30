@@ -1,6 +1,21 @@
 'use server'
 
-export const allusers = async()=>{
-    const res = await fetch('http://localhost:5000/users')
-    return res.json()
-}
+
+
+export const allusers = async () => {
+    
+
+    const res = await fetch('https://legalease-server-tau.vercel.app/users', {
+        cache: 'no-store',
+       
+
+    });
+
+    if (!res.ok) {
+        const errorText = await res.text();
+        console.error("API Error:", errorText);
+        throw new Error("Failed to fetch users");
+    }
+
+    return res.json();
+};

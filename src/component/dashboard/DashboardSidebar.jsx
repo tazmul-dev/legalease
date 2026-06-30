@@ -19,7 +19,8 @@ export async function DashboardSidebar() {
     ];
     const adminLinks = [
         {  href: "/dashboard/admin/manage-users", label: "manage-users" },
-        { href: "/dashboard/admin/all-transactions", label: "all-transactions" },
+        { href: "/dashboard/admin/all-transactions", label: "All-transactions" },
+        { href: "/dashboard/admin/analytics", label: "Analytics" },
        
     ];
     const navLinksMap = {
